@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import getChannels from '../../store/actions/channels'
 const Channels = ({ channels }) => (
   <ul className="list-group">
     <li className="list-group-item">
@@ -18,12 +18,30 @@ const Channels = ({ channels }) => (
   </ul>
 )
 
+class ChannelsContainer extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {}
+  }
+
+  componentWillMount() {
+    this.props.getChannels()
+  }
+
+  render() {
+    return <Channels />
+  }
+}
+
 const mapStateToProps = state => ({
   channels: state.channels
 })
 
 const mapDispatchToProps = dispatch => ({
-
+  getChannels: () => {
+    dispatch(getChannels())
+  }
 })
 
-export default connect(mapStateToProps)(Channels)
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelsContainer)
