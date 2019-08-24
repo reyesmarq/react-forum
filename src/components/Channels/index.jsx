@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
+import { connect } from 'react-redux'
 
-const Channels = () => (
+const Channels = ({ channels }) => (
   <ul className="list-group">
     <li className="list-group-item">
       Laravel
@@ -15,6 +16,14 @@ const Channels = () => (
       Web development
     </li>
   </ul>
-);
+)
 
-export default Channels;
+const mapStateToProps = state => ({
+  channels: state.channels
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+export default connect(mapStateToProps)(Channels)
