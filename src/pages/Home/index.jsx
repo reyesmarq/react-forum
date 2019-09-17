@@ -11,13 +11,15 @@ class HomeContainer extends Component {
   }
   render() {
     return (
-      <HomeThreads />
+      <HomeThreads
+        threads={this.props.threadsData.data}
+      />
     )
   }
 }
 
 const mapStateToProsp = (state) => ({
-  threads: state.threads
+  threadsData: state.threads
 })
 
 const mapDispatchToProps = (dispatch) => ({
