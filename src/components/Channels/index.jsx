@@ -16,12 +16,29 @@ class ChannelsContainer extends React.Component {
   }
 
   render() {
-    return <ChannelsList channels={this.props.channels}/>
+    return (
+      <div>
+        {/* {
+          !this.props.loading &&
+          <ChannelsList channels={this.props.channels}/>
+        }
+        {
+          this.props.loading &&
+          <p className="text-center">Loading channels...</p>
+        } */}
+        {
+          !this.props.loading
+            ? <ChannelsList channels={this.props.channels} />
+            : <p className="text-center">Loading channels...</p>
+        }
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => ({
-  channels: state.channels
+  channels: state.channels.data,
+  loading: state.channels.loading
 })
 
 const mapDispatchToProps = dispatch => ({
