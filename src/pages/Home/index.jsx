@@ -15,23 +15,41 @@ class HomeContainer extends Component {
   }
 
   handlePageChange = page => {
-    this.props.getThreads(page.selected + 1)    
+    this.props.getThreads(page.selected + 1)
   }
 
   render() {
-    console.log(this.props.threadsData)
     return (
-      <HomeThreads
-        threads={this.props.threadsData.data}
-        handlePageChange={this.handlePageChange}
-        pageCount={this.getPageCount(this.props.threadsData.total, this.props.threadsData.per_page)}
-      />
+      <>
+        {/* {
+          !this.props.loading
+            ? <HomeThreads
+              threads={this.props.threadsData.data}
+              handlePageChange={this.handlePageChange}
+              pageCount={this.getPageCount(this.props.threadsData.total, this.props.threadsData.per_page)}
+            />
+            : null
+        } */}
+        {
+          !this.props.loading &&
+          <HomeThreads
+            threads={this.props.threadsData.data}
+            handlePageChange={this.handlePageChange}
+            pageCount={this.getPageCount(this.props.threadsData.total, this.props.threadsData.per_page)}
+          />
+        }
+        {
+          this.props.loading &&
+          <p className="text-center">Loading threads...</p>
+        }
+      </>
     )
   }
 }
 
 const mapStateToProsp = (state) => ({
-  threadsData: state.threads
+  threadsData: state.threads,
+  loading: state.threads.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({
