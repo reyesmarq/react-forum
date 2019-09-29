@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import { getThread } from '../../store/actions/threads'
+import { getReplies } from '../../store/actions/replies'
 
 import SingleThread from './SingleThread'
 import { strictEqual } from 'assert'
@@ -13,7 +14,9 @@ class ThreadContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getThread(this.props.match.params.id)
+    const { id } = this.props.match.params
+    this.props.getThread(id)
+    this.props.getReplies(id)
   }
 
   render() {
@@ -31,12 +34,17 @@ class ThreadContainer extends React.Component {
 
 const mapStateToProps = state => ({
   thread: state.thread.data,
-  loading: state.thread.loading
+  loading: state.thread.loading,
+  loadingReplies: state.thread.loading,
+  replies: state.thread.replies
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getThread: (id) => {
     dispatch(getThread(id))
+  },
+  getReplies: (id) => {
+    dispatch(getReplies(id))
   }
 })
 
