@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import HomeThreads from './HomeThreads'
 import { getThreads } from '../../store/actions/threads'
+import Loader from '../../components/Loader'
 
 class HomeContainer extends Component {
 
@@ -41,7 +42,7 @@ class HomeContainer extends Component {
         }
         {
           this.props.loading &&
-          <p className="text-center">Loading threads...</p>
+          <Loader section="threads" />
         }
       </>
     )

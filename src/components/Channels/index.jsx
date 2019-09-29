@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import getChannels from '../../store/actions/channels'
 import ChannelsList from './ChannelsList'
+import Loader from '../Loader'
 
 
 class ChannelsContainer extends React.Component {
@@ -29,7 +30,7 @@ class ChannelsContainer extends React.Component {
         {
           !this.props.loading
             ? <ChannelsList channels={this.props.channels} />
-            : <p className="text-center">Loading channels...</p>
+            : <Loader section="channels" />
         }
       </div>
     )
