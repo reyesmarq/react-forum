@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 import LoginForm from './LoginForm';
 
+import { loginUser } from '../../store/actions/auth'
+
 class LoginContainer extends Component {
-  handleSubmit = (values) => {
-    console.log(values)
+
+  /**
+   * In order for {submitting}  in loginform to work. This function must be an async function
+   */
+  handleSubmit = async (values) => {
+    await this.props.loginUser(values)
   }
   render() {
     return (
@@ -15,4 +22,8 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (values) => dispatch(loginUser(values))
+})
+
+export default connect(null, mapDispatchToProps)(LoginContainer);
